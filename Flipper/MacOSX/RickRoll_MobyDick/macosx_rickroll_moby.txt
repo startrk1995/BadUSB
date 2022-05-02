@@ -18,5 +18,6 @@ ENTER
 DELAY 200
 STRING ./setup.sh&!
 ENTER
-GUI Q
-
+STRING exit
+ENTER
+GUI q
