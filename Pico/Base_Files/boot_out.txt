@@ -1,0 +1,4 @@
+Adafruit CircuitPython 7.2.5 on 2022-04-06; Raspberry Pi Pico with rp2040
+Board ID:raspberry_pi_pico
+boot.py output:
+USB drive enabled
