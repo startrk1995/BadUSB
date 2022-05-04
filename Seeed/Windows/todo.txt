@@ -1,1 +1,2 @@
 Add more here
+Add more information-gathering scripts like mimikatz
